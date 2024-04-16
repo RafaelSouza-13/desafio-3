@@ -1,7 +1,21 @@
 package com.rafa.desafio3.services;
 
+import com.rafa.desafio3.dto.ClientDto;
+import com.rafa.desafio3.entities.Client;
+import com.rafa.desafio3.repositories.ClientRepository;
+import com.rafa.desafio3.services.exceptions.ClientNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClientService {
+    @Autowired
+    ClientRepository repository;
+
+    @Transactional(readOnly = true)
+    public ClientDto findById(Long id){
+        Client client = repository.findById(id).orElseThrow(()-> new ClientNotFoundException("Cliente com o id solicitado não foi encontrado"));
+        return new ClientDto(client);
+    }
 }
