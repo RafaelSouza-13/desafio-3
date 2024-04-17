@@ -18,7 +18,7 @@ status code mais adequando para cada chamada
 
 ## Ambiente do projeto
 >[!NOTE]
-> As credenciais de acesso para o banco h2 são username: test e password:
+> As credenciais de acesso para o banco h2 são username: test e password é vazio
 
 > `host: http://localhost:8080`
 
