@@ -1,14 +1,18 @@
 package com.rafa.desafio3.dto;
 
 import com.rafa.desafio3.entities.Client;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
 public class ClientDto {
     private Long id;
+    @NotBlank(message = "O campo nome deve ser preenchido. Não pode ser vazio")
     private String name;
     private String cpf;
+    @Positive(message = "O campo renda não pode ser negativo")
     private Double income;
+    @PastOrPresent(message = "Data de nascimento não pode ser no futuro")
     private LocalDate birthDate;
     private Integer children;
 
