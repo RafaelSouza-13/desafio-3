@@ -42,4 +42,14 @@ public class ClientService {
         client.setChildren(dto.getChildren());
         client.setBirthDate(dto.getBirthDate());
     }
+
+    public ClientDto update(Long id, ClientDto dto) {
+        if(!repository.existsById(id)){
+            throw new ClientNotFoundException("Cliente não encontrado");
+        }
+        Client client = repository.getReferenceById(id);
+        dtoToClient(dto, client);
+        repository.save(client);
+        return new ClientDto(client);
+    }
 }

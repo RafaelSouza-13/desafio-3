@@ -1,7 +1,16 @@
-{
-  "name": "Miguel Oliveira Cunha",
-  "cpf": "91235699560",
-  "income": 3000.0,
-  "birthDate": "1998-08-16",
-  "children": 0
-}
+[
+  {
+    "name": "Miguel Oliveira Cunha",
+    "cpf": "91235699560",
+    "income": 3000.0,
+    "birthDate": "1998-08-16",
+    "children": 0
+  },
+  {
+    "name": "Maria Silva",
+    "cpf": "12345678901",
+    "income": 6500.0,
+    "birthDate": "1994-07-20",
+    "children": 2
+  }
+]
