@@ -26,4 +26,20 @@ public class ClientService {
         Page<Client> result = repository.findAll(pageable);
         return result.map(x -> new ClientDto(x));
     }
+
+    @Transactional
+    public ClientDto insert(ClientDto dto){
+        Client client = new Client();
+        dtoToClient(dto, client);
+        client = repository.save(client);
+        return new ClientDto(client);
+    }
+
+    private void dtoToClient(ClientDto dto, Client client){
+        client.setName(dto.getName());
+        client.setCpf(dto.getCpf());
+        client.setIncome(dto.getIncome());
+        client.setChildren(dto.getChildren());
+        client.setBirthDate(dto.getBirthDate());
+    }
 }
