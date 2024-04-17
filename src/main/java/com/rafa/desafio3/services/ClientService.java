@@ -5,6 +5,8 @@ import com.rafa.desafio3.entities.Client;
 import com.rafa.desafio3.repositories.ClientRepository;
 import com.rafa.desafio3.services.exceptions.ClientNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,5 +19,11 @@ public class ClientService {
     public ClientDto findById(Long id){
         Client client = repository.findById(id).orElseThrow(()-> new ClientNotFoundException("Cliente com o id solicitado não foi encontrado"));
         return new ClientDto(client);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ClientDto> findAll(Pageable pageable){
+        Page<Client> result = repository.findAll(pageable);
+        return result.map(x -> new ClientDto(x));
     }
 }
