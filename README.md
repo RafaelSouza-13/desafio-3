@@ -11,7 +11,7 @@ status code mais adequando para cada chamada
 - [x] Busca paginada de todos os clientes
 - [x] Inserção de um novo cliente
 - [x] Atualização de um cliente por id
-- [ ] Deletar um cliente por id
+- [x] Deletar um cliente por id
 - [x] Validação de campos
 - [x] Tratamento de exceções
 - [x] Retornar status code aquedado

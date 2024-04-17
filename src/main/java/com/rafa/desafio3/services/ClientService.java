@@ -4,7 +4,9 @@ import com.rafa.desafio3.dto.ClientDto;
 import com.rafa.desafio3.entities.Client;
 import com.rafa.desafio3.repositories.ClientRepository;
 import com.rafa.desafio3.services.exceptions.ClientNotFoundException;
+import com.rafa.desafio3.services.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,7 @@ public class ClientService {
         client.setBirthDate(dto.getBirthDate());
     }
 
+    @Transactional
     public ClientDto update(Long id, ClientDto dto) {
         if(!repository.existsById(id)){
             throw new ClientNotFoundException("Cliente não encontrado");
@@ -51,5 +54,17 @@ public class ClientService {
         dtoToClient(dto, client);
         repository.save(client);
         return new ClientDto(client);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        if(!repository.existsById(id)){
+            throw new ClientNotFoundException("Cliente não encontrado");
+        }
+        try{
+            repository.deleteById(id);
+        }catch(DataIntegrityViolationException e){
+            throw new DatabaseException("Falha de integridade referencial");
+        }
     }
 }
